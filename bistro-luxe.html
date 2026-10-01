@@ -1,0 +1,2095 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bistro Luxe - Fine Dining & Immersive Experience</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#fdf8f6",
+                100: "#f2e8e5",
+                500: "#c59b27",
+                600: "#a67c1c",
+                700: "#8c6514",
+                800: "#66490f",
+                900: "#4a340a",
+              },
+              darkBg: "#0f172a",
+              darkCard: "#1e293b",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      .font-serif {
+        font-family: "Playfair Display", serif;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #475569;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-brand-50 text-slate-800 dark:bg-darkBg dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300"
+  >
+    <!-- Navigation Bar -->
+    <header
+      class="sticky top-0 z-50 bg-white/80 dark:bg-darkCard/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"
+      >
+        <!-- Brand Logo -->
+        <a
+          href="#home"
+          onclick="switchTab('home')"
+          class="flex items-center space-x-3 group"
+        >
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform"
+          >
+            <i class="fa-solid fa-utensils text-lg"></i>
+          </div>
+          <div>
+            <span
+              class="text-2xl font-bold font-serif tracking-tight text-slate-900 dark:text-white"
+              >Bistro Luxe</span
+            >
+            <span
+              class="block text-[10px] tracking-widest text-brand-600 dark:text-brand-400 uppercase font-semibold"
+              >Fine Dining & Bar</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <button
+            onclick="switchTab('home')"
+            id="nav-home"
+            class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 text-brand-600 dark:text-brand-400 font-semibold"
+          >
+            Home
+          </button>
+          <button
+            onclick="switchTab('menu')"
+            id="nav-menu"
+            class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
+          >
+            Menu
+          </button>
+          <button
+            onclick="switchTab('reservation')"
+            id="nav-reservation"
+            class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
+          >
+            Reservations
+          </button>
+          <button
+            onclick="switchTab('tracking')"
+            id="nav-tracking"
+            class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
+          >
+            Order Tracking
+          </button>
+          <button
+            onclick="switchTab('kitchen')"
+            id="nav-kitchen"
+            class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center gap-1.5"
+          >
+            <i class="fa-solid fa-fire-burner text-xs"></i> Kitchen
+          </button>
+          <button
+            onclick="switchTab('admin')"
+            id="nav-admin"
+            class="nav-btn px-4 py-2 rounded-xl text-sm font-medium transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center gap-1.5"
+          >
+            <i class="fa-solid fa-chart-line text-xs"></i> Admin
+          </button>
+        </nav>
+
+        <!-- Right Actions (Cart & Theme Toggle) -->
+        <div class="flex items-center space-x-3">
+          <!-- Theme Toggle -->
+          <button
+            onclick="toggleDarkMode()"
+            aria-label="Toggle Theme"
+            class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+          >
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+          </button>
+
+          <!-- Cart Button -->
+          <button
+            onclick="switchTab('cart')"
+            class="relative p-2.5 rounded-xl bg-brand-500 text-white hover:bg-brand-600 shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+          >
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span
+              id="cart-badge"
+              class="hidden absolute -top-1.5 -right-1.5 bg-rose-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white dark:border-darkCard"
+              >0</span
+            >
+            <span class="hidden lg:inline text-xs font-semibold pr-1"
+              >Cart</span
+            >
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button
+            onclick="toggleMobileMenu()"
+            class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+          >
+            <i class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Modal/Dropdown -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white dark:bg-darkCard border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-1"
+      >
+        <button
+          onclick="
+            switchTab('home');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Home
+        </button>
+        <button
+          onclick="
+            switchTab('menu');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Menu
+        </button>
+        <button
+          onclick="
+            switchTab('reservation');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Reservations
+        </button>
+        <button
+          onclick="
+            switchTab('tracking');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Order Tracking
+        </button>
+        <button
+          onclick="
+            switchTab('kitchen');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Kitchen View
+        </button>
+        <button
+          onclick="
+            switchTab('admin');
+            toggleMobileMenu();
+          "
+          class="block w-full text-left px-4 py-2.5 rounded-lg text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800"
+        >
+          Admin Dashboard
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+      <!-- 1. HOME TAB -->
+      <section id="tab-home" class="tab-content">
+        <!-- Hero Section -->
+        <div
+          class="relative bg-slate-900 text-white overflow-hidden py-24 lg:py-32"
+        >
+          <div class="absolute inset-0 z-0 opacity-40">
+            <img
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80"
+              alt="Restaurant Interior"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent z-10"
+          ></div>
+          <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl space-y-6">
+              <div
+                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/20 border border-brand-500/40 text-brand-300 text-xs font-semibold uppercase tracking-wider"
+              >
+                <i class="fa-solid fa-star text-[10px]"></i> Award Winning
+                Culinary Experience
+              </div>
+              <h1
+                class="text-4xl sm:text-6xl font-extrabold tracking-tight font-serif leading-tight"
+              >
+                Where Passion Meets
+                <span class="text-brand-400">Exquisite Taste</span>
+              </h1>
+              <p class="text-lg text-slate-300 font-light leading-relaxed">
+                Indulge in carefully crafted artisanal dishes made from organic
+                farm-fresh ingredients. Experience fine dining redefined at
+                Bistro Luxe.
+              </p>
+              <div class="flex flex-wrap gap-4 pt-4">
+                <button
+                  onclick="switchTab('menu')"
+                  class="px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-2xl shadow-xl hover:shadow-brand-500/25 transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-book-open"></i> Explore Menu
+                </button>
+                <button
+                  onclick="switchTab('reservation')"
+                  class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 font-semibold rounded-2xl transition-all flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-calendar-days"></i> Reserve a Table
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Highlights -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div class="text-center max-w-xl mx-auto mb-16 space-y-3">
+            <h2 class="text-3xl font-bold font-serif">The Bistro Experience</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">
+              Everything you need for an unforgettable dining experience, right
+              at your fingertips.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="p-8 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-4"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center text-2xl"
+              >
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h3 class="text-xl font-bold font-serif">Interactive Menu</h3>
+              <p
+                class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
+              >
+                Browse categorized dishes, customize ingredients, check dietary
+                tags, and order instantly for delivery or pickup.
+              </p>
+              <button
+                onclick="switchTab('menu')"
+                class="text-brand-600 dark:text-brand-400 font-semibold text-sm inline-flex items-center gap-1.5 hover:underline"
+              >
+                View Menu <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+            <div
+              class="p-8 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-4"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center text-2xl"
+              >
+                <i class="fa-solid fa-chair"></i>
+              </div>
+              <h3 class="text-xl font-bold font-serif">Smart Reservations</h3>
+              <p
+                class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
+              >
+                Book your preferred table size, date, and time slot instantly
+                with live status feedback and booking confirmations.
+              </p>
+              <button
+                onclick="switchTab('reservation')"
+                class="text-brand-600 dark:text-brand-400 font-semibold text-sm inline-flex items-center gap-1.5 hover:underline"
+              >
+                Book Table <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+            <div
+              class="p-8 rounded-3xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow space-y-4"
+            >
+              <div
+                class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center text-2xl"
+              >
+                <i class="fa-solid fa-clock-rotate-left"></i>
+              </div>
+              <h3 class="text-xl font-bold font-serif">Live Order Tracking</h3>
+              <p
+                class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed"
+              >
+                Track your food preparation and delivery timeline in real-time
+                from our kitchen straight to your doorstep.
+              </p>
+              <button
+                onclick="switchTab('tracking')"
+                class="text-brand-600 dark:text-brand-400 font-semibold text-sm inline-flex items-center gap-1.5 hover:underline"
+              >
+                Track Order <i class="fa-solid fa-arrow-right text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. MENU TAB -->
+      <section id="tab-menu" class="tab-content hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <!-- Header & Search -->
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10"
+          >
+            <div>
+              <h2 class="text-3xl font-extrabold font-serif">
+                Our Culinary Menu
+              </h2>
+              <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">
+                Explore our chef's hand-picked specialties and seasonal
+                delights.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <div class="relative">
+                <i
+                  class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400"
+                ></i>
+                <input
+                  type="text"
+                  id="menu-search"
+                  oninput="filterMenu()"
+                  placeholder="Search dishes..."
+                  class="pl-10 pr-4 py-2.5 rounded-2xl bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-full sm:w-64"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Pills -->
+          <div class="flex overflow-x-auto pb-4 mb-8 gap-2 scrollbar-none">
+            <button
+              onclick="setMenuCategory('all')"
+              id="cat-all"
+              class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-500 text-white shadow-sm"
+            >
+              All Dishes
+            </button>
+            <button
+              onclick="setMenuCategory('Starters')"
+              id="cat-Starters"
+              class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+            >
+              Starters
+            </button>
+            <button
+              onclick="setMenuCategory('Mains')"
+              id="cat-Mains"
+              class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+            >
+              Mains
+            </button>
+            <button
+              onclick="setMenuCategory('Desserts')"
+              id="cat-Desserts"
+              class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+            >
+              Desserts
+            </button>
+            <button
+              onclick="setMenuCategory('Drinks')"
+              id="cat-Drinks"
+              class="cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300"
+            >
+              Drinks
+            </button>
+          </div>
+
+          <!-- Menu Grid -->
+          <div
+            id="menu-grid"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. RESERVATION TAB -->
+      <section id="tab-reservation" class="tab-content hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div
+            class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl shadow-lg p-6 sm:p-10 space-y-8"
+          >
+            <div class="text-center space-y-2">
+              <span
+                class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-widest"
+                >Table Booking</span
+              >
+              <h2 class="text-3xl font-bold font-serif">Reserve Your Table</h2>
+              <p class="text-slate-600 dark:text-slate-400 text-sm">
+                Secure your dining spot in advance for a seamless experience.
+              </p>
+            </div>
+
+            <form
+              id="reservation-form"
+              onsubmit="handleReservationSubmit(event)"
+              class="space-y-6"
+            >
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    id="res-name"
+                    required
+                    placeholder="John Doe"
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
+                    >Email Address</label
+                  >
+                  <input
+                    type="email"
+                    id="res-email"
+                    required
+                    placeholder="john@example.com"
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
+                    >Date</label
+                  >
+                  <input
+                    type="date"
+                    id="res-date"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
+                    >Time Slot</label
+                  >
+                  <select
+                    id="res-time"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  >
+                    <option value="12:00 PM">12:00 PM - Lunch</option>
+                    <option value="01:30 PM">01:30 PM - Lunch</option>
+                    <option value="06:00 PM">06:00 PM - Dinner</option>
+                    <option value="07:30 PM">07:30 PM - Dinner</option>
+                    <option value="09:00 PM">09:00 PM - Dinner</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
+                    >Party Size</label
+                  >
+                  <select
+                    id="res-guests"
+                    required
+                    class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                  >
+                    <option value="1">1 Person</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4">4 Guests</option>
+                    <option value="6">6 Guests (Large)</option>
+                    <option value="8">8+ Guests (VIP)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2"
+                  >Special Requests / Dietary Notes</label
+                >
+                <textarea
+                  id="res-notes"
+                  rows="3"
+                  placeholder="Anniversary seating, high chair needed, allergies..."
+                  class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-2xl shadow-lg transition-all"
+              >
+                Confirm Table Reservation
+              </button>
+            </form>
+
+            <!-- Active Reservations List -->
+            <div
+              id="reservation-receipt"
+              class="hidden pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4"
+            >
+              <div
+                class="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 space-y-2"
+              >
+                <div class="flex items-center gap-2 font-bold text-lg">
+                  <i class="fa-solid fa-circle-check"
+                    ><span>Reservation Confirmed!</span></i
+                  >
+                </div>
+                <p class="text-sm">
+                  We have received your table booking request. We look forward
+                  to hosting you!
+                </p>
+                <div
+                  id="receipt-details"
+                  class="text-xs space-y-1 font-mono pt-2"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. CART & CHECKOUT TAB -->
+      <section id="tab-cart" class="tab-content hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 class="text-3xl font-bold font-serif mb-8">
+            Your Cart & Checkout
+          </h2>
+          <div
+            id="cart-container"
+            class="grid grid-cols-1 lg:grid-cols-3 gap-8"
+          >
+            <!-- Cart Items -->
+            <div class="lg:col-span-2 space-y-4" id="cart-items-list">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Checkout Summary -->
+            <div
+              class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm h-fit space-y-6"
+            >
+              <h3 class="text-xl font-bold font-serif">Order Summary</h3>
+
+              <!-- Order Type Toggle -->
+              <div
+                class="grid grid-cols-2 gap-2 p-1 bg-slate-100 dark:bg-slate-900 rounded-xl"
+              >
+                <button
+                  type="button"
+                  onclick="setOrderType('delivery')"
+                  id="type-delivery"
+                  class="py-2 text-xs font-bold rounded-lg bg-white dark:bg-darkCard shadow-sm transition-all"
+                >
+                  Delivery
+                </button>
+                <button
+                  type="button"
+                  onclick="setOrderType('pickup')"
+                  id="type-pickup"
+                  class="py-2 text-xs font-bold rounded-lg text-slate-500 transition-all"
+                >
+                  Pickup
+                </button>
+              </div>
+
+              <!-- Delivery Address Input -->
+              <div id="delivery-address-box" class="space-y-2">
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-slate-500"
+                  >Delivery Address</label
+                >
+                <input
+                  type="text"
+                  id="checkout-address"
+                  placeholder="123 Luxury Ave, Apt 4B"
+                  class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+                />
+              </div>
+
+              <!-- Promo Code -->
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  id="promo-code"
+                  placeholder="Promo code (e.g. LUXE10)"
+                  class="flex-grow px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none uppercase"
+                />
+                <button
+                  onclick="applyPromoCode()"
+                  class="px-4 py-2 bg-slate-900 dark:bg-slate-800 text-white text-xs font-bold rounded-xl hover:bg-brand-600 transition-colors"
+                >
+                  Apply
+                </button>
+              </div>
+              <div id="promo-msg" class="text-xs"></div>
+
+              <!-- Tip Selector -->
+              <div class="space-y-2">
+                <label
+                  class="block text-xs font-semibold uppercase tracking-wider text-slate-500"
+                  >Add Tip</label
+                >
+                <div class="grid grid-cols-4 gap-2">
+                  <button
+                    type="button"
+                    onclick="setTip(0)"
+                    class="tip-btn py-2 rounded-xl border text-xs font-semibold border-slate-200 dark:border-slate-800 hover:border-brand-500"
+                  >
+                    0%
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTip(10)"
+                    class="tip-btn py-2 rounded-xl border text-xs font-semibold border-slate-200 dark:border-slate-800 hover:border-brand-500"
+                  >
+                    10%
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTip(15)"
+                    class="tip-btn py-2 rounded-xl border text-xs font-semibold bg-brand-500 text-white border-brand-500"
+                  >
+                    15%
+                  </button>
+                  <button
+                    type="button"
+                    onclick="setTip(20)"
+                    class="tip-btn py-2 rounded-xl border text-xs font-semibold border-slate-200 dark:border-slate-800 hover:border-brand-500"
+                  >
+                    20%
+                  </button>
+                </div>
+              </div>
+
+              <!-- Cost Breakdown -->
+              <div
+                class="space-y-2 pt-4 border-t border-slate-200 dark:border-slate-800 text-sm"
+              >
+                <div class="flex justify-between text-slate-500">
+                  <span>Subtotal</span>
+                  <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between text-slate-500">
+                  <span>Taxes (8%)</span>
+                  <span id="cart-tax">$0.00</span>
+                </div>
+                <div class="flex justify-between text-slate-500">
+                  <span>Delivery Fee</span>
+                  <span id="cart-delivery">$3.99</span>
+                </div>
+                <div class="flex justify-between text-slate-500">
+                  <span>Tip</span>
+                  <span id="cart-tip">$0.00</span>
+                </div>
+                <div
+                  class="flex justify-between text-slate-500"
+                  id="discount-row"
+                  style="display: none"
+                >
+                  <span class="text-emerald-500">Discount</span>
+                  <span id="cart-discount" class="text-emerald-500"
+                    >-$0.00</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between text-lg font-bold pt-2 border-t border-slate-200 dark:border-slate-800"
+                >
+                  <span>Total</span>
+                  <span
+                    id="cart-total"
+                    class="text-brand-600 dark:text-brand-400"
+                    >$0.00</span
+                  >
+                </div>
+              </div>
+
+              <button
+                onclick="openCheckoutModal()"
+                class="w-full py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-2xl shadow-lg transition-all"
+              >
+                Proceed to Payment
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ORDER TRACKING TAB -->
+      <section id="tab-tracking" class="tab-content hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="text-center space-y-2">
+            <span
+              class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-widest"
+              >Real-time Status</span
+            >
+            <h2 class="text-3xl font-bold font-serif">Order Tracking</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">
+              Monitor your live kitchen preparation and delivery progress.
+            </p>
+          </div>
+
+          <div id="tracking-container" class="space-y-6">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. KITCHEN VIEW TAB -->
+      <section id="tab-kitchen" class="tab-content hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+          <div class="flex items-center justify-between">
+            <div>
+              <span
+                class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-widest"
+                >Staff Portal</span
+              >
+              <h2 class="text-3xl font-bold font-serif">
+                Kitchen Display System (KDS)
+              </h2>
+            </div>
+            <button
+              onclick="renderKitchen()"
+              class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-xs font-bold rounded-xl hover:bg-slate-200 transition-colors"
+            >
+              <i class="fa-solid fa-rotate-right mr-1"></i> Refresh Queue
+            </button>
+          </div>
+
+          <div
+            id="kitchen-orders-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. ADMIN MANAGEMENT TAB -->
+      <section id="tab-admin" class="tab-content hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div>
+              <span
+                class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-widest"
+                >Management Suite</span
+              >
+              <h2 class="text-3xl font-bold font-serif">
+                Admin Control Center
+              </h2>
+            </div>
+            <button
+              onclick="openAddItemModal()"
+              class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl shadow-md transition-all flex items-center gap-2"
+            >
+              <i class="fa-solid fa-plus"></i> Add New Menu Item
+            </button>
+          </div>
+
+          <!-- Metrics Overview -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="p-6 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-2"
+            >
+              <span class="text-xs font-semibold text-slate-500 uppercase"
+                >Total Revenue</span
+              >
+              <div
+                id="admin-metric-revenue"
+                class="text-3xl font-bold font-serif text-brand-600 dark:text-brand-400"
+              >
+                $0.00
+              </div>
+            </div>
+            <div
+              class="p-6 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-2"
+            >
+              <span class="text-xs font-semibold text-slate-500 uppercase"
+                >Active Orders</span
+              >
+              <div
+                id="admin-metric-orders"
+                class="text-3xl font-bold font-serif"
+              >
+                0
+              </div>
+            </div>
+            <div
+              class="p-6 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-2"
+            >
+              <span class="text-xs font-semibold text-slate-500 uppercase"
+                >Menu Dishes</span
+              >
+              <div id="admin-metric-menu" class="text-3xl font-bold font-serif">
+                0
+              </div>
+            </div>
+            <div
+              class="p-6 bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm space-y-2"
+            >
+              <span class="text-xs font-semibold text-slate-500 uppercase"
+                >Table Reservations</span
+              >
+              <div
+                id="admin-metric-reservations"
+                class="text-3xl font-bold font-serif"
+              >
+                0
+              </div>
+            </div>
+          </div>
+
+          <!-- Admin Management Tables -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Menu Management Table -->
+            <div
+              class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4"
+            >
+              <h3 class="text-xl font-bold font-serif">
+                Menu Inventory Management
+              </h3>
+              <div class="overflow-x-auto max-h-96">
+                <table class="w-full text-left text-sm">
+                  <thead
+                    class="border-b border-slate-200 dark:border-slate-800 text-xs text-slate-400 uppercase"
+                  >
+                    <tr>
+                      <th class="py-3">Dish</th>
+                      <th class="py-3">Category</th>
+                      <th class="py-3">Price</th>
+                      <th class="py-3 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="admin-menu-table"
+                    class="divide-y divide-slate-100 dark:divide-slate-800"
+                  >
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Customer Feedback & Reviews -->
+            <div
+              class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4"
+            >
+              <h3 class="text-xl font-bold font-serif">
+                Customer Feedback & Reviews
+              </h3>
+              <div
+                class="space-y-3 max-h-96 overflow-y-auto"
+                id="admin-reviews-list"
+              >
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Item Customization Modal -->
+    <div
+      id="modal-customize"
+      class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-6 relative"
+      >
+        <button
+          onclick="closeCustomizeModal()"
+          class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white"
+        >
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <div id="customize-modal-content" class="space-y-4">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Payment Modal -->
+    <div
+      id="modal-checkout"
+      class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-6 relative"
+      >
+        <button
+          onclick="closeCheckoutModal()"
+          class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white"
+        >
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <div class="space-y-2">
+          <h3 class="text-2xl font-bold font-serif">Secure Payment Gateway</h3>
+          <p class="text-xs text-slate-500">
+            Simulated 256-bit encrypted checkout
+          </p>
+        </div>
+
+        <form onsubmit="processPayment(event)" class="space-y-4">
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+              >Cardholder Name</label
+            >
+            <input
+              type="text"
+              required
+              placeholder="Jane Doe"
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+              >Card Number</label
+            >
+            <input
+              type="text"
+              required
+              placeholder="4242 •••• •••• 4242"
+              maxlength="19"
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none font-mono"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+                >Expiry Date</label
+              >
+              <input
+                type="text"
+                required
+                placeholder="MM/YY"
+                maxlength="5"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none font-mono"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+                >CVV</label
+              >
+              <input
+                type="password"
+                required
+                placeholder="•••"
+                maxlength="4"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none font-mono"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-2xl shadow-lg transition-all mt-2"
+          >
+            Pay <span id="modal-pay-amount">$0.00</span> & Place Order
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add/Edit Menu Item Modal -->
+    <div
+      id="modal-item-edit"
+      class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-6 relative"
+      >
+        <button
+          onclick="closeItemEditModal()"
+          class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white"
+        >
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+        <h3 id="item-modal-title" class="text-2xl font-bold font-serif">
+          Add Menu Item
+        </h3>
+        <form
+          id="item-edit-form"
+          onsubmit="saveMenuItem(event)"
+          class="space-y-4"
+        >
+          <input type="hidden" id="edit-item-id" />
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+              >Dish Name</label
+            >
+            <input
+              type="text"
+              id="edit-item-name"
+              required
+              placeholder="Truffle Risotto"
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+                >Category</label
+              >
+              <select
+                id="edit-item-category"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+              >
+                <option value="Starters">Starters</option>
+                <option value="Mains">Mains</option>
+                <option value="Desserts">Desserts</option>
+                <option value="Drinks">Drinks</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+                >Price ($)</label
+              >
+              <input
+                type="number"
+                step="0.01"
+                id="edit-item-price"
+                required
+                placeholder="24.50"
+                class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+              >Image URL</label
+            >
+            <input
+              type="url"
+              id="edit-item-image"
+              required
+              placeholder="https://images.unsplash.com/..."
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label
+              class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1"
+              >Description</label
+            >
+            <textarea
+              id="edit-item-desc"
+              rows="2"
+              required
+              placeholder="Rich arborio rice with black truffle..."
+              class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-2xl shadow-lg transition-all"
+          >
+            Save Menu Item
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white dark:bg-darkCard border-t border-slate-200 dark:border-slate-800 mt-auto py-12"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+      >
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center text-white"
+          >
+            <i class="fa-solid fa-utensils text-xs"></i>
+          </div>
+          <span class="text-xl font-bold font-serif">Bistro Luxe</span>
+        </div>
+        <p class="text-xs text-slate-500">
+          © 2026 Bistro Luxe Inc. All rights reserved. Crafted for fine dining
+          enthusiasts.
+        </p>
+        <div class="flex space-x-4 text-slate-400">
+          <a href="#" class="hover:text-brand-500 transition-colors"
+            ><i class="fa-brands fa-instagram text-lg"></i
+          ></a>
+          <a href="#" class="hover:text-brand-500 transition-colors"
+            ><i class="fa-brands fa-facebook text-lg"></i
+          ></a>
+          <a href="#" class="hover:text-brand-500 transition-colors"
+            ><i class="fa-brands fa-twitter text-lg"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const defaultMenu = [
+        {
+          id: 1,
+          name: "Truffle Arancini",
+          category: "Starters",
+          price: 16.0,
+          desc: "Crispy risotto spheres infused with black truffle and mozzarella.",
+          image:
+            "https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=600&q=80",
+          tags: ["Vegetarian"],
+        },
+        {
+          id: 2,
+          name: "Pan-Seared Scallops",
+          category: "Starters",
+          price: 22.0,
+          desc: "Jumbo sea scallops served with lemon-herb butter and parsnip puree.",
+          image:
+            "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80",
+          tags: ["Gluten-Free"],
+        },
+        {
+          id: 3,
+          name: "Wagyu Beef Tenderloin",
+          category: "Mains",
+          price: 58.0,
+          desc: "A5 Grade Japanese Wagyu with roasted garlic jus and seasonal root vegetables.",
+          image:
+            "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=600&q=80",
+          tags: ["Chef Special"],
+        },
+        {
+          id: 4,
+          name: "Lobster Thermidor",
+          category: "Mains",
+          price: 46.0,
+          desc: "Fresh Maine lobster filled with a rich wine, cheese, and herb sauce.",
+          image:
+            "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80",
+          tags: ["Spicy"],
+        },
+        {
+          id: 5,
+          name: "Wild Mushroom Risotto",
+          category: "Mains",
+          price: 28.0,
+          desc: "Arborio rice with porcini mushrooms, parmesan crisp, and truffle oil.",
+          image:
+            "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=600&q=80",
+          tags: ["Vegan", "Gluten-Free"],
+        },
+        {
+          id: 6,
+          name: "Valrhona Chocolate Soufflé",
+          category: "Desserts",
+          price: 14.0,
+          desc: "Warm molten dark chocolate soufflé served with Madagascar vanilla bean gelato.",
+          image:
+            "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=600&q=80",
+          tags: ["Vegetarian"],
+        },
+        {
+          id: 7,
+          name: "Yuzu Lemon Tart",
+          category: "Desserts",
+          price: 12.0,
+          desc: "Tangy yuzu curd in a buttery pastry crust with torched Swiss meringue.",
+          image:
+            "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80",
+          tags: ["Vegetarian"],
+        },
+        {
+          id: 8,
+          name: "Smoked Rosemary Old Fashioned",
+          category: "Drinks",
+          price: 18.0,
+          desc: "Small-batch bourbon, aromatic bitters, charred rosemary, and orange zest.",
+          image:
+            "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80",
+          tags: ["Signature"],
+        },
+        {
+          id: 9,
+          name: "Artisan Berry Spritz",
+          category: "Drinks",
+          price: 10.0,
+          desc: "Muddled blackberries, mint, fresh lime, and sparkling artisanal tonic.",
+          image:
+            "https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=600&q=80",
+          tags: ["Vegan"],
+        },
+      ];
+
+      const defaultReviews = [
+        {
+          id: 1,
+          name: "Sophia Martinez",
+          rating: 5,
+          date: "Yesterday",
+          comment:
+            "The Wagyu Beef Tenderloin was absolute perfection! Impeccable service.",
+        },
+        {
+          id: 2,
+          name: "David Sterling",
+          rating: 5,
+          date: "2 days ago",
+          comment:
+            "Loved the online reservation and live tracking. Seamless dining experience.",
+        },
+        {
+          id: 3,
+          name: "Elena Rostova",
+          rating: 4,
+          date: "3 days ago",
+          comment: "Truffle Arancini is a must-try starter. Great ambiance.",
+        },
+      ];
+
+      let menuItems =
+        JSON.parse(localStorage.getItem("bistro_menu")) || defaultMenu;
+      let cart = JSON.parse(localStorage.getItem("bistro_cart")) || [];
+      let orders = JSON.parse(localStorage.getItem("bistro_orders")) || [];
+      let reservations =
+        JSON.parse(localStorage.getItem("bistro_reservations")) || [];
+      let reviews =
+        JSON.parse(localStorage.getItem("bistro_reviews")) || defaultReviews;
+
+      let activeCategory = "all";
+      let searchQuery = "";
+      let orderType = "delivery";
+      let tipPercent = 15;
+      let appliedDiscount = 0;
+      let activeCustomItem = null;
+
+      function persistData() {
+        localStorage.setItem("bistro_menu", JSON.stringify(menuItems));
+        localStorage.setItem("bistro_cart", JSON.stringify(cart));
+        localStorage.setItem("bistro_orders", JSON.stringify(orders));
+        localStorage.setItem(
+          "bistro_reservations",
+          JSON.stringify(reservations),
+        );
+        localStorage.setItem("bistro_reviews", JSON.stringify(reviews));
+      }
+
+      function switchTab(tabId) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => el.classList.add("hidden"));
+        document.getElementById(`tab-${tabId}`).classList.remove("hidden");
+
+        document.querySelectorAll(".nav-btn").forEach((btn) => {
+          btn.classList.remove(
+            "text-brand-600",
+            "dark:text-brand-400",
+            "font-semibold",
+          );
+          btn.classList.add("text-slate-600", "dark:text-slate-300");
+        });
+        const activeBtn = document.getElementById(`nav-${tabId}`);
+        if (activeBtn) {
+          activeBtn.classList.add(
+            "text-brand-600",
+            "dark:text-brand-400",
+            "font-semibold",
+          );
+          activeBtn.classList.remove("text-slate-600", "dark:text-slate-300");
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        if (tabId === "menu") renderMenu();
+        if (tabId === "cart") renderCart();
+        if (tabId === "tracking") renderTracking();
+        if (tabId === "kitchen") renderKitchen();
+        if (tabId === "admin") renderAdmin();
+      }
+
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobile-menu");
+        menu.classList.toggle("hidden");
+      }
+
+      function toggleDarkMode() {
+        const html = document.documentElement;
+        html.classList.toggle("dark");
+        const isDark = html.classList.contains("dark");
+        const icon = document.getElementById("theme-icon");
+        icon.className = isDark ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        localStorage.setItem("bistro_theme", isDark ? "dark" : "light");
+      }
+
+      // Initialize Theme on load
+      if (
+        localStorage.getItem("bistro_theme") === "dark" ||
+        (!localStorage.getItem("bistro_theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+        document.getElementById("theme-icon").className = "fa-solid fa-sun";
+      }
+
+      function setMenuCategory(category) {
+        activeCategory = category;
+        document.querySelectorAll(".cat-btn").forEach((btn) => {
+          btn.className =
+            "cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300";
+        });
+        const selectedBtn = document.getElementById(`cat-${category}`);
+        if (selectedBtn) {
+          selectedBtn.className =
+            "cat-btn px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap bg-brand-500 text-white shadow-sm";
+        }
+        renderMenu();
+      }
+
+      function filterMenu() {
+        searchQuery = document
+          .getElementById("menu-search")
+          .value.toLowerCase();
+        renderMenu();
+      }
+
+      function renderMenu() {
+        const grid = document.getElementById("menu-grid");
+        const filtered = menuItems.filter((item) => {
+          const matchesCat =
+            activeCategory === "all" || item.category === activeCategory;
+          const matchesSearch =
+            item.name.toLowerCase().includes(searchQuery) ||
+            item.desc.toLowerCase().includes(searchQuery);
+          return matchesCat && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+          grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-400">No dishes found matching your search.</div>`;
+          return;
+        }
+
+        grid.innerHTML = filtered
+          .map(
+            (item) => `
+                <div class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-900">
+                            <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/600x400/c59b27/ffffff?text=Bistro+Luxe'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 right-3 flex gap-1">
+                                ${(item.tags || []).map((t) => `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-900/80 backdrop-blur-md text-white">${t}</span>`).join("")}
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wider">${item.category}</span>
+                                <span class="text-lg font-bold font-serif text-slate-900 dark:text-white">$${item.price.toFixed(2)}</span>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif text-slate-900 dark:text-white">${item.name}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="openCustomizeModal(${item.id})" class="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-brand-500 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-plus text-[10px]"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function openCustomizeModal(itemId) {
+        const item = menuItems.find((i) => i.id === itemId);
+        if (!item) return;
+        activeCustomItem = item;
+
+        const modal = document.getElementById("modal-customize");
+        const content = document.getElementById("customize-modal-content");
+
+        content.innerHTML = `
+                <div class="flex gap-4 items-center">
+                    <img src="${item.image}" class="w-20 h-20 rounded-2xl object-cover" onerror="this.src='https://placehold.co/200x200/c59b27/ffffff?text=Item'">
+                    <div>
+                        <span class="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase">${item.category}</span>
+                        <h3 class="text-xl font-bold font-serif">${item.name}</h3>
+                        <div class="text-brand-600 dark:text-brand-400 font-bold">$${item.price.toFixed(2)}</div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 leading-relaxed">${item.desc}</p>
+                <div class="space-y-3 pt-2">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500">Special Instructions / Allergies</label>
+                    <textarea id="custom-notes" rows="2" placeholder="e.g. Extra dressing on the side..." class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                </div>
+                <div class="flex items-center justify-between pt-4">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-xs font-semibold text-slate-500">Quantity</span>
+                        <div class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 rounded-xl p-1">
+                            <button onclick="adjustQty(-1)" class="w-7 h-7 rounded-lg bg-white dark:bg-darkCard flex items-center justify-center text-xs font-bold shadow-sm">-</button>
+                            <span id="custom-qty" class="text-sm font-bold px-2">1</span>
+                            <button onclick="adjustQty(1)" class="w-7 h-7 rounded-lg bg-white dark:bg-darkCard flex items-center justify-center text-xs font-bold shadow-sm">+</button>
+                        </div>
+                    </div>
+                    <button onclick="confirmAddToCart()" class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl shadow-md transition-all">
+                        Add to Cart
+                    </button>
+                </div>
+            `;
+        modal.classList.remove("hidden");
+      }
+
+      function closeCustomizeModal() {
+        document.getElementById("modal-customize").classList.add("hidden");
+        activeCustomItem = null;
+      }
+
+      function adjustQty(amount) {
+        const qtyEl = document.getElementById("custom-qty");
+        let current = parseInt(qtyEl.innerText) + amount;
+        if (current < 1) current = 1;
+        qtyEl.innerText = current;
+      }
+
+      function confirmAddToCart() {
+        if (!activeCustomItem) return;
+        const qty = parseInt(document.getElementById("custom-qty").innerText);
+        const notes = document.getElementById("custom-notes").value;
+
+        const existingIndex = cart.findIndex(
+          (c) => c.id === activeCustomItem.id && c.notes === notes,
+        );
+        if (existingIndex > -1) {
+          cart[existingIndex].qty += qty;
+        } else {
+          cart.push({
+            cartId: Date.now(),
+            id: activeCustomItem.id,
+            name: activeCustomItem.name,
+            price: activeCustomItem.price,
+            image: activeCustomItem.image,
+            qty: qty,
+            notes: notes,
+          });
+        }
+
+        persistData();
+        updateCartBadge();
+        closeCustomizeModal();
+        showToast(`Added ${qty}x ${activeCustomItem.name} to cart!`);
+      }
+
+      function updateCartBadge() {
+        const badge = document.getElementById("cart-badge");
+        const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+        if (totalItems > 0) {
+          badge.innerText = totalItems;
+          badge.classList.remove("hidden");
+        } else {
+          badge.classList.add("hidden");
+        }
+      }
+
+      function setOrderType(type) {
+        orderType = type;
+        const deliveryBtn = document.getElementById("type-delivery");
+        const pickupBtn = document.getElementById("type-pickup");
+        const addressBox = document.getElementById("delivery-address-box");
+        const deliveryFeeEl = document.getElementById("cart-delivery");
+
+        if (type === "delivery") {
+          deliveryBtn.className =
+            "py-2 text-xs font-bold rounded-lg bg-white dark:bg-darkCard shadow-sm transition-all";
+          pickupBtn.className =
+            "py-2 text-xs font-bold rounded-lg text-slate-500 transition-all";
+          addressBox.style.display = "block";
+          deliveryFeeEl.innerText = "$3.99";
+        } else {
+          pickupBtn.className =
+            "py-2 text-xs font-bold rounded-lg bg-white dark:bg-darkCard shadow-sm transition-all";
+          deliveryBtn.className =
+            "py-2 text-xs font-bold rounded-lg text-slate-500 transition-all";
+          addressBox.style.display = "none";
+          deliveryFeeEl.innerText = "$0.00";
+        }
+        calculateCartTotals();
+      }
+
+      function setTip(percent) {
+        tipPercent = percent;
+        document.querySelectorAll(".tip-btn").forEach((btn) => {
+          btn.className =
+            "tip-btn py-2 rounded-xl border text-xs font-semibold border-slate-200 dark:border-slate-800 hover:border-brand-500";
+        });
+        event.target.className =
+          "tip-btn py-2 rounded-xl border text-xs font-semibold bg-brand-500 text-white border-brand-500";
+        calculateCartTotals();
+      }
+
+      function applyPromoCode() {
+        const code = document
+          .getElementById("promo-code")
+          .value.trim()
+          .toUpperCase();
+        const msg = document.getElementById("promo-msg");
+        if (code === "LUXE10") {
+          appliedDiscount = 0.1; // 10% off
+          msg.className = "text-xs text-emerald-500 font-semibold";
+          msg.innerText = "Promo applied: 10% discount!";
+          document.getElementById("discount-row").style.display = "flex";
+        } else {
+          appliedDiscount = 0;
+          msg.className = "text-xs text-rose-500 font-semibold";
+          msg.innerText = "Invalid promo code (try LUXE10)";
+          document.getElementById("discount-row").style.display = "none";
+        }
+        calculateCartTotals();
+      }
+
+      function renderCart() {
+        const list = document.getElementById("cart-items-list");
+        if (cart.length === 0) {
+          list.innerHTML = `
+                    <div class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-12 text-center space-y-4">
+                        <div class="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl mx-auto text-slate-400">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-serif">Your cart is empty</h3>
+                        <p class="text-xs text-slate-500">Discover our culinary menu and add delicious dishes to your cart.</p>
+                        <button onclick="switchTab('menu')" class="px-6 py-3 bg-brand-500 text-white text-xs font-semibold rounded-xl">Explore Menu</button>
+                    </div>
+                `;
+          calculateCartTotals();
+          return;
+        }
+
+        list.innerHTML = cart
+          .map(
+            (item) => `
+                <div class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-4 sm:p-6 flex items-center justify-between gap-4 shadow-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="${item.image}" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover" onerror="this.src='https://placehold.co/200x200/c59b27/ffffff?text=Item'">
+                        <div class="space-y-1">
+                            <h4 class="font-bold font-serif text-base">${item.name}</h4>
+                            <div class="text-xs text-brand-600 dark:text-brand-400 font-semibold">$${item.price.toFixed(2)} each</div>
+                            ${item.notes ? `<div class="text-[11px] text-slate-400 italic">Note: ${item.notes}</div>` : ""}
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 rounded-xl p-1">
+                            <button onclick="updateCartQty(${item.cartId}, -1)" class="w-7 h-7 rounded-lg bg-white dark:bg-darkCard flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-sm font-bold px-2">${item.qty}</span>
+                            <button onclick="updateCartQty(${item.cartId}, 1)" class="w-7 h-7 rounded-lg bg-white dark:bg-darkCard flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                        <button onclick="removeFromCart(${item.cartId})" class="text-slate-400 hover:text-rose-500 p-2 transition-colors">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+
+        calculateCartTotals();
+      }
+
+      function updateCartQty(cartId, amount) {
+        const item = cart.find((c) => c.cartId === cartId);
+        if (!item) return;
+        item.qty += amount;
+        if (item.qty <= 0) {
+          cart = cart.filter((c) => c.cartId !== cartId);
+        }
+        persistData();
+        updateCartBadge();
+        renderCart();
+      }
+
+      function removeFromCart(cartId) {
+        cart = cart.filter((c) => c.cartId !== cartId);
+        persistData();
+        updateCartBadge();
+        renderCart();
+        showToast("Item removed from cart");
+      }
+
+      function calculateCartTotals() {
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.qty,
+          0,
+        );
+        const tax = subtotal * 0.08;
+        const deliveryFee =
+          orderType === "delivery" && cart.length > 0 ? 3.99 : 0;
+        const discount = subtotal * appliedDiscount;
+        const tip = (subtotal - discount) * (tipPercent / 100);
+        const total = Math.max(
+          0,
+          subtotal + tax + deliveryFee + tip - discount,
+        );
+
+        document.getElementById("cart-subtotal").innerText =
+          `$${subtotal.toFixed(2)}`;
+        document.getElementById("cart-tax").innerText = `$${tax.toFixed(2)}`;
+        document.getElementById("cart-delivery").innerText =
+          `$${deliveryFee.toFixed(2)}`;
+        document.getElementById("cart-tip").innerText = `$${tip.toFixed(2)}`;
+        if (appliedDiscount > 0) {
+          document.getElementById("cart-discount").innerText =
+            `-$${discount.toFixed(2)}`;
+        }
+        document.getElementById("cart-total").innerText =
+          `$${total.toFixed(2)}`;
+        document.getElementById("modal-pay-amount").innerText =
+          `$${total.toFixed(2)}`;
+      }
+
+      function openCheckoutModal() {
+        if (cart.length === 0) {
+          showToast("Your cart is empty!");
+          return;
+        }
+        if (
+          orderType === "delivery" &&
+          !document.getElementById("checkout-address").value.trim()
+        ) {
+          showToast("Please enter a delivery address.");
+          return;
+        }
+        document.getElementById("modal-checkout").classList.remove("hidden");
+      }
+
+      function closeCheckoutModal() {
+        document.getElementById("modal-checkout").classList.add("hidden");
+      }
+
+      function processPayment(event) {
+        event.preventDefault();
+        const subtotal = cart.reduce(
+          (sum, item) => sum + item.price * item.qty,
+          0,
+        );
+        const tax = subtotal * 0.08;
+        const deliveryFee = orderType === "delivery" ? 3.99 : 0;
+        const discount = subtotal * appliedDiscount;
+        const tip = (subtotal - discount) * (tipPercent / 100);
+        const total = Math.max(
+          0,
+          subtotal + tax + deliveryFee + tip - discount,
+        );
+
+        const newOrder = {
+          id: "ORD-" + Math.floor(100000 + Math.random() * 900000),
+          date: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          items: [...cart],
+          type: orderType,
+          address:
+            document.getElementById("checkout-address").value ||
+            "Dine-In / Pickup",
+          total: total,
+          status: "Placed", // Placed -> Preparing -> Out for Delivery / Ready -> Delivered
+          timeline: {
+            Placed: new Date().toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            Preparing: null,
+            Ready: null,
+            Delivered: null,
+          },
+        };
+
+        orders.unshift(newOrder);
+        cart = [];
+        persistData();
+        updateCartBadge();
+        closeCheckoutModal();
+
+        triggerConfetti();
+        switchTab("tracking");
+        showToast("Order placed successfully!");
+      }
+
+      function handleReservationSubmit(event) {
+        event.preventDefault();
+        const name = document.getElementById("res-name").value;
+        const email = document.getElementById("res-email").value;
+        const date = document.getElementById("res-date").value;
+        const time = document.getElementById("res-time").value;
+        const guests = document.getElementById("res-guests").value;
+        const notes = document.getElementById("res-notes").value;
+
+        const newRes = {
+          id: "RES-" + Math.floor(1000 + Math.random() * 9000),
+          name,
+          email,
+          date,
+          time,
+          guests,
+          notes,
+          status: "Confirmed",
+        };
+
+        reservations.unshift(newRes);
+        persistData();
+
+        const receipt = document.getElementById("reservation-receipt");
+        const details = document.getElementById("receipt-details");
+        receipt.classList.remove("hidden");
+        details.innerHTML = `
+                <div>Reservation ID: <strong>${newRes.id}</strong></div>
+                <div>Name: <strong>${name}</strong></div>
+                <div>Date & Time: <strong>${date} at ${time}</strong></div>
+                <div>Party Size: <strong>${guests} Guests</strong></div>
+            `;
+        document.getElementById("reservation-form").reset();
+        showToast("Table reserved successfully!");
+      }
+
+      function renderTracking() {
+        const container = document.getElementById("tracking-container");
+        if (orders.length === 0) {
+          container.innerHTML = `
+                    <div class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-12 text-center space-y-4">
+                        <div class="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl mx-auto text-slate-400">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-serif">No active orders found</h3>
+                        <p class="text-xs text-slate-500">Place an order from our menu to track its real-time preparation status.</p>
+                        <button onclick="switchTab('menu')" class="px-6 py-3 bg-brand-500 text-white text-xs font-semibold rounded-xl">View Menu</button>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = orders
+          .map((ord) => {
+            const statuses = [
+              "Placed",
+              "Preparing",
+              ord.type === "delivery" ? "Out for Delivery" : "Ready",
+              "Delivered",
+            ];
+            const currentIndex = statuses.indexOf(ord.status);
+
+            return `
+                    <div class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-sm space-y-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <div>
+                                <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">${ord.id}</span>
+                                <h3 class="text-xl font-bold font-serif mt-0.5">Order Status: <span class="text-brand-500">${ord.status}</span></h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm font-bold">$${ord.total.toFixed(2)}</div>
+                                <div class="text-xs text-slate-400">${ord.items.length} items • ${ord.type.toUpperCase()}</div>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar Timeline -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2">
+                            ${statuses
+                              .map((st, idx) => {
+                                const isDone = idx <= currentIndex;
+                                const isCurrent = st === ord.status;
+                                return `
+                                    <div class="space-y-2 p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border ${isCurrent ? "border-brand-500 ring-2 ring-brand-500/20" : "border-slate-200 dark:border-slate-800"}">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-[10px] font-bold uppercase tracking-wider ${isDone ? "text-brand-600 dark:text-brand-400" : "text-slate-400"}">Step ${idx + 1}</span>
+                                            <i class="fa-solid ${isDone ? "fa-circle-check text-brand-500" : "fa-circle text-slate-300 dark:text-slate-700"} text-xs"></i>
+                                        </div>
+                                        <div class="text-xs font-bold">${st}</div>
+                                    </div>
+                                `;
+                              })
+                              .join("")}
+                        </div>
+
+                        <!-- Items breakdown -->
+                        <div class="text-xs text-slate-500 space-y-1 pt-2">
+                            <div class="font-bold text-slate-700 dark:text-slate-300 mb-1">Ordered Items:</div>
+                            ${ord.items.map((i) => `<div>• ${i.qty}x ${i.name} ${i.notes ? `(${i.notes})` : ""}</div>`).join("")}
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function renderKitchen() {
+        const grid = document.getElementById("kitchen-orders-grid");
+        if (orders.length === 0) {
+          grid.innerHTML = `<div class="col-span-full py-16 text-center text-slate-400">No orders in kitchen queue.</div>`;
+          return;
+        }
+
+        grid.innerHTML = orders
+          .map(
+            (ord) => `
+                <div class="bg-white dark:bg-darkCard border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-brand-600 dark:text-brand-400">${ord.id}</span>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-brand-500/10 text-brand-600 dark:text-brand-400 uppercase">${ord.type}</span>
+                        </div>
+                        <div class="text-xs text-slate-400">Ordered at ${ord.date}</div>
+                        <div class="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                            ${ord.items
+                              .map(
+                                (i) => `
+                                <div class="flex justify-between text-sm">
+                                    <span class="font-semibold">${i.qty}x ${i.name}</span>
+                                    <span class="text-xs text-slate-400">${i.notes || ""}</span>
+                                </div>
+                            `,
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                        <label class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400">Update Status</label>
+                        <select onchange="updateOrderStatus('${ord.id}', this.value)" class="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                            <option value="Placed" ${ord.status === "Placed" ? "selected" : ""}>Placed</option>
+                            <option value="Preparing" ${ord.status === "Preparing" ? "selected" : ""}>Preparing</option>
+                            <option value="${ord.type === "delivery" ? "Out for Delivery" : "Ready"}" ${ord.status === "Out for Delivery" || ord.status === "Ready" ? "selected" : ""}>${ord.type === "delivery" ? "Out for Delivery" : "Ready"}</option>
+                            <option value="Delivered" ${ord.status === "Delivered" ? "selected" : ""}>Delivered / Completed</option>
+                        </select>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function updateOrderStatus(orderId, newStatus) {
+        const ord = orders.find((o) => o.id === orderId);
+        if (ord) {
+          ord.status = newStatus;
+          persistData();
+          showToast(`Order ${orderId} updated to ${newStatus}`);
+          renderKitchen();
+        }
+      }
+
+      function renderAdmin() {
+        const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+        document.getElementById("admin-metric-revenue").innerText =
+          `$${totalRevenue.toFixed(2)}`;
+        document.getElementById("admin-metric-orders").innerText =
+          orders.length;
+        document.getElementById("admin-metric-menu").innerText =
+          menuItems.length;
+        document.getElementById("admin-metric-reservations").innerText =
+          reservations.length;
+
+        // Render Menu Table
+        const menuTable = document.getElementById("admin-menu-table");
+        menuTable.innerHTML = menuItems
+          .map(
+            (item) => `
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/50">
+                    <td class="py-3 flex items-center gap-3">
+                        <img src="${item.image}" class="w-10 h-10 rounded-xl object-cover" onerror="this.src='https://placehold.co/100x100/c59b27/ffffff?text=Item'">
+                        <span class="font-bold">${item.name}</span>
+                    </td>
+                    <td class="py-3 text-slate-500">${item.category}</td>
+                    <td class="py-3 font-mono font-semibold">$${item.price.toFixed(2)}</td>
+                    <td class="py-3 text-right space-x-2">
+                        <button onclick="openEditItemModal(${item.id})" class="p-2 text-slate-400 hover:text-brand-500"><i class="fa-solid fa-pen"></i></button>
+                        <button onclick="deleteMenuItem(${item.id})" class="p-2 text-slate-400 hover:text-rose-500"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            `,
+          )
+          .join("");
+
+        // Render Reviews List
+        const reviewsList = document.getElementById("admin-reviews-list");
+        reviewsList.innerHTML = reviews
+          .map(
+            (r) => `
+                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm">${r.name}</span>
+                        <span class="text-xs text-slate-400">${r.date}</span>
+                    </div>
+                    <div class="text-brand-500 text-xs">
+                        ${'<i class="fa-solid fa-star"></i>'.repeat(r.rating)}
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">${r.comment}</p>
+                </div>
+            `,
+          )
+          .join("");
+      }
+
+      function openAddItemModal() {
+        document.getElementById("item-modal-title").innerText = "Add Menu Item";
+        document.getElementById("edit-item-id").value = "";
+        document.getElementById("item-edit-form").reset();
+        document.getElementById("modal-item-edit").classList.remove("hidden");
+      }
+
+      function openEditItemModal(itemId) {
+        const item = menuItems.find((i) => i.id === itemId);
+        if (!item) return;
+        document.getElementById("item-modal-title").innerText =
+          "Edit Menu Item";
+        document.getElementById("edit-item-id").value = item.id;
+        document.getElementById("edit-item-name").value = item.name;
+        document.getElementById("edit-item-category").value = item.category;
+        document.getElementById("edit-item-price").value = item.price;
+        document.getElementById("edit-item-image").value = item.image;
+        document.getElementById("edit-item-desc").value = item.desc;
+        document.getElementById("modal-item-edit").classList.remove("hidden");
+      }
+
+      function closeItemEditModal() {
+        document.getElementById("modal-item-edit").classList.add("hidden");
+      }
+
+      function saveMenuItem(event) {
+        event.preventDefault();
+        const id = document.getElementById("edit-item-id").value;
+        const name = document.getElementById("edit-item-name").value;
+        const category = document.getElementById("edit-item-category").value;
+        const price = parseFloat(
+          document.getElementById("edit-item-price").value,
+        );
+        const image = document.getElementById("edit-item-image").value;
+        const desc = document.getElementById("edit-item-desc").value;
+
+        if (id) {
+          const item = menuItems.find((i) => i.id == id);
+          if (item) {
+            item.name = name;
+            item.category = category;
+            item.price = price;
+            item.image = image;
+            item.desc = desc;
+          }
+        } else {
+          const newItem = {
+            id: Date.now(),
+            name,
+            category,
+            price,
+            image,
+            desc,
+            tags: ["New"],
+          };
+          menuItems.push(newItem);
+        }
+
+        persistData();
+        closeItemEditModal();
+        renderAdmin();
+        showToast("Menu item saved successfully!");
+      }
+
+      function deleteMenuItem(itemId) {
+        menuItems = menuItems.filter((i) => i.id !== itemId);
+        persistData();
+        renderAdmin();
+        showToast("Menu item deleted.");
+      }
+
+      function showToast(message) {
+        const toast = document.createElement("div");
+        toast.className =
+          "fixed bottom-6 right-6 z-50 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-6 py-3 rounded-2xl shadow-2xl text-sm font-bold flex items-center gap-3 animate-bounce";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check text-brand-500"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      function triggerConfetti() {
+        for (let i = 0; i < 50; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "fixed z-50 w-2 h-2 rounded-full animate-ping";
+          confetti.style.left = Math.random() * window.innerWidth + "px";
+          confetti.style.top = Math.random() * window.innerHeight + "px";
+          confetti.style.backgroundColor = [
+            "#c59b27",
+            "#3b82f6",
+            "#10b981",
+            "#ec4899",
+          ][Math.floor(Math.random() * 4)];
+          document.body.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 1000);
+        }
+      }
+
+      // Initialize App on load
+      window.onload = function () {
+        updateCartBadge();
+        renderMenu();
+      };
+    </script>
+  </body>
+</html>
